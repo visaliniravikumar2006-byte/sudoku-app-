@@ -1,19 +1,13 @@
-const CACHE_NAME = "sudoku-cache-v1";
-
 self.addEventListener("install", e => {
-  self.skipWaiting();
   e.waitUntil(
-    caches.open(CACHE_NAME).then(cache => {
+    caches.open("sudoku-cache").then(cache => {
       return cache.addAll([
         "./",
-        "./index.html"
+        "./index.html",
+        "./manifest.json"
       ]);
     })
   );
-});
-
-self.addEventListener("activate", e => {
-  e.waitUntil(self.clients.claim());
 });
 
 self.addEventListener("fetch", e => {
